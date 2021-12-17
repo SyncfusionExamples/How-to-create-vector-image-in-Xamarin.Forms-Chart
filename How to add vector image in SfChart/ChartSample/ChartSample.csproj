@@ -1,0 +1,52 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Growth.svg" />
+    <None Remove="Image1.svg" />
+    <None Remove="Media\Age12.svg" />
+    <None Remove="Media\Age14.svg" />
+    <None Remove="Media\Age16.svg" />
+    <None Remove="Media\Age18.svg" />
+    <None Remove="Media\Growth.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Media\Age18.svg" />
+    <EmbeddedResource Include="Media\Age16.svg" />
+    <EmbeddedResource Include="Media\Age14.svg" />
+    <EmbeddedResource Include="Media\Age12.svg" />
+    <EmbeddedResource Include="Media\Growth.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.3-preview.40" />
+    <PackageReference Include="Syncfusion.Xamarin.Buttons" Version="19.1.0.59" />
+    <PackageReference Include="Syncfusion.Xamarin.Core" Version="19.1.0.59" />
+    <PackageReference Include="Syncfusion.Xamarin.SfChart" Version="19.1.0.59" />
+    <PackageReference Include="Xamarin.Forms" Version="4.7.0.1351" />
+    <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.Forms.Svg" Version="1.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="View\DrawVectorImage\DrawVector.xaml.cs">
+      <DependentUpon>DrawVector.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="View\AddSvgVectorFile\SVGImage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+</Project>

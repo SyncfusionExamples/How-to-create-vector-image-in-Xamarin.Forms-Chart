@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource" 
+             xmlns:local="clr-namespace:ChartSample"
+             x:Class="ChartSample.SVGImage">
+
+    <ContentPage.BindingContext>
+        <local:ViewModel x:Name="viewModel"/>
+    </ContentPage.BindingContext>
+    
+    <ContentPage.Content>
+        <StackLayout>
+            <!--Adding SVG vector file directly into the DataMarker-->
+
+            <chart:SfChart x:Name="chart" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <chart:SfChart.Title>
+                    <chart:ChartTitle Text="Age Vs Weight"/>
+                </chart:SfChart.Title>
+
+                <chart:SfChart.Resources>
+                    <local:Converter x:Key="heightConverter"/> 
+                    <local:ImageConverter x:Key="imageConverter"/>
+
+                    <DataTemplate x:Key="dataMarkerTemplate">
+                        <Image Aspect="Fill" HeightRequest="{Binding Converter={StaticResource heightConverter}, ConverterParameter={x:Reference chart}}" WidthRequest="55">
+                            <Image.Source>
+                                <svg:SvgImageSource Source="{Binding YValue, Converter={StaticResource imageConverter}, ConverterParameter={x:Reference series}}"  Width="100" Height="100" />
+                            </Image.Source>
+                        </Image>
+                    </DataTemplate>
+                </chart:SfChart.Resources>
+
+                <chart:SfChart.PrimaryAxis>
+                    <chart:CategoryAxis ShowMajorGridLines="False" >
+                        <chart:CategoryAxis.Title>
+                            <chart:ChartAxisTitle Text="Age(Years)"/>
+                        </chart:CategoryAxis.Title>
+                    </chart:CategoryAxis>
+                </chart:SfChart.PrimaryAxis>
+
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis Minimum="0" Maximum="70" Interval="5" ShowMajorGridLines="False" OpposedPosition="True">
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="Weight(Kg)"/>
+                        </chart:NumericalAxis.Title>
+                    </chart:NumericalAxis>
+                </chart:SfChart.SecondaryAxis>
+
+                <chart:SfChart.Series>
+                    <chart:ColumnSeries x:Name="series" DataMarkerPosition="Bottom" Color="Transparent" ItemsSource="{Binding Data}" XBindingPath="XValue" YBindingPath="YValue">
+                        <chart:ColumnSeries.DataMarker>
+                            <chart:ChartDataMarker ShowLabel="True" LabelContent="DataMarkerLabel" >
+                                <chart:ChartDataMarker.LabelTemplate>
+                                    <DataTemplate>
+                                        <Image Aspect="Fill"  HeightRequest="{Binding Converter={StaticResource heightConverter}, ConverterParameter={x:Reference chart}}" WidthRequest="55">
+                                            <Image.Source>
+                                                <svg:SvgImageSource Source="{Binding Data.XValue ,Converter={StaticResource imageConverter}}"  Width="100" Height="100" />
+                                            </Image.Source>
+                                        </Image>
+                                    </DataTemplate>
+                                </chart:ChartDataMarker.LabelTemplate>
+                                <chart:ChartDataMarker.LabelStyle>
+                                    <chart:DataMarkerLabelStyle LabelPosition="Inner"/>
+                                </chart:ChartDataMarker.LabelStyle>
+                            </chart:ChartDataMarker>
+                        </chart:ColumnSeries.DataMarker>
+                    </chart:ColumnSeries>
+                </chart:SfChart.Series>
+            </chart:SfChart>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

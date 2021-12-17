@@ -1,0 +1,73 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms" 
+             xmlns:local="clr-namespace:ChartSample" 
+             xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms" xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms" xmlns:svg="clr-namespace:Xamarin.Forms.Svg;assembly=SvgImageSource"
+             mc:Ignorable="d"
+             x:Class="ChartSample.DrawVector">
+    
+    <ContentPage.BindingContext>
+        <local:ViewModel x:Name="viewModel"/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout>
+            
+            <!-- Drawing vector using SkiaSharp -->
+            <chart:SfChart x:Name="chart" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <chart:SfChart.Title>
+                    <chart:ChartTitle Text="Age Vs Weight"/>
+                </chart:SfChart.Title>
+
+                <chart:SfChart.Resources>
+                    <local:Converter x:Key="heightConverter"/>
+                </chart:SfChart.Resources>
+
+                <chart:SfChart.PrimaryAxis>
+                    <chart:CategoryAxis ShowMajorGridLines="False" >
+                        <chart:CategoryAxis.Title>
+                            <chart:ChartAxisTitle Text="Age(Years)"/>
+                        </chart:CategoryAxis.Title>
+                    </chart:CategoryAxis>
+                </chart:SfChart.PrimaryAxis>
+
+                <chart:SfChart.SecondaryAxis>
+                    <chart:NumericalAxis Minimum="0" Maximum="60" Interval="5" MinorTicksPerInterval="5" ShowMajorGridLines="True" OpposedPosition="True">
+                        <chart:NumericalAxis.Title>
+                            <chart:ChartAxisTitle Text="Weight(Kg)"/>
+                        </chart:NumericalAxis.Title>
+                        <chart:NumericalAxis.MajorGridLineStyle>
+                            <chart:ChartLineStyle x:Name="gridline" />
+                        </chart:NumericalAxis.MajorGridLineStyle>
+                        <chart:NumericalAxis.MinorGridLineStyle>
+                            <chart:ChartLineStyle StrokeColor="Transparent"/>
+                        </chart:NumericalAxis.MinorGridLineStyle>
+                    </chart:NumericalAxis>
+                </chart:SfChart.SecondaryAxis>
+
+                <chart:SfChart.Series>
+                    <chart:ColumnSeries DataMarkerPosition="Bottom" Color="Transparent" ItemsSource="{Binding Data}" XBindingPath="XValue" YBindingPath="YValue">
+                        <chart:ColumnSeries.DataMarker>
+                            <chart:ChartDataMarker ShowLabel="True" LabelContent="DataMarkerLabel">
+                                <chart:ChartDataMarker.LabelTemplate>
+                                    <DataTemplate>
+                                        <skia:SKCanvasView x:Name="canvasView" HeightRequest="{Binding Converter={StaticResource heightConverter}, ConverterParameter={x:Reference chart}}" WidthRequest="55"
+                                           PaintSurface="OnCanvasViewPaintSurface" />
+                                    </DataTemplate>
+                                </chart:ChartDataMarker.LabelTemplate>
+                                <chart:ChartDataMarker.LabelStyle>
+                                    <chart:DataMarkerLabelStyle LabelPosition="Inner"/>
+                                </chart:ChartDataMarker.LabelStyle>
+                            </chart:ChartDataMarker>
+                        </chart:ColumnSeries.DataMarker>
+                    </chart:ColumnSeries>
+
+                </chart:SfChart.Series>
+
+            </chart:SfChart>
+        </StackLayout>
+    </ContentPage.Content>
+
+</ContentPage>
