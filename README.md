@@ -1,10 +1,10 @@
-# How-to-create-vector-image-in-Xamarin.Forms-Charts
+# How to create vector image in Xamarin.Forms Charts
 
-Vector images can be scaled to any size without losing quality. This article explains how to add vector images in SfChart using the DataMarker LabelTemplate property.
+Vector images can be scaled to any size without losing quality. This article explains how to add vector images in **SfChart** using the DataMarker [LabelTemplate](https://help.syncfusion.com/cr/xamarin/Syncfusion.SfChart.XForms.ChartDataMarker.html#Syncfusion_SfChart_XForms_ChartDataMarker_LabelTemplate) property.
 
 You can achieve this requirement in two ways:
 
-•	By adding SVG vector file directly into the DataMarker LabelTemplate property.
+•	By adding SVG vector file directly into the DataMarker [LabelTemplate](https://help.syncfusion.com/cr/xamarin/Syncfusion.SfChart.XForms.ChartDataMarker.html#Syncfusion_SfChart_XForms_ChartDataMarker_LabelTemplate) property.
 
 •	Drawing vector images using SkiaSharp.
 
@@ -13,10 +13,10 @@ You can achieve this requirement in two ways:
 ## Adding an SVG vector file directly into a DataMarker Template
 
 ### Step 1: 
-Add the Xamarin.Forms.Svg NuGet package in the project and it provides support to add SvgImageSource to Xamarin.Forms ImageSource.
+Add the [Xamarin.Forms.Svg](https://www.nuget.org/packages/Xamarin.Forms.Svg/) NuGet package in the project and it provides support to add **SvgImageSource** to Xamarin.Forms ImageSource.
 
 ### Step 2: 
-Initialize the SvgImage.Init to make it render in each platform-specific projects, as shown in the following code sample.
+Initialize the **SvgImage.Init** to make it render in each platform-specific projects, as shown in the following code sample.
 
 **Android [C#]**
 ```
@@ -41,7 +41,7 @@ public override bool FinishedLaunching(UIApplication app, NSDictionary options)
    }
 
 ```
-In PCL: Add SvgImageSource.RegisterAssembly().
+**In PCL:** Add **SvgImageSource.RegisterAssembly().**
 
 **[C#]**
 ```
@@ -57,7 +57,7 @@ protected override void OnCreate(Bundle savedInstanceState)
 Add the image to your project and set the Build Action to Embedded Resource for your SVG image.
 
 ### Step 4: 
-Define a HeightConverter to calculate the height for the image.
+Define a **HeightConverter** to calculate the height for the image.
 
 **[C#]**
 ```
@@ -126,7 +126,7 @@ public interface IChartDependencyService
 ```
 
 ### Step 5: 
-Add SvgImageSource to the ImageSource property of the image in DataMarker LabelTemplate and set the height and width for the image. Also, set the series color as Transparent to make the series disappear in the background. You can achieve this, as shown in the following code sample.
+Add **SvgImageSource** to the **ImageSource** property of the image in DataMarker **LabelTemplate** and set the height and width for the image. Also, set the series color as Transparent to make the series disappear in the background. You can achieve this, as shown in the following code sample.
 
 **[Xaml]**
 ```
@@ -156,16 +156,16 @@ Add SvgImageSource to the ImageSource property of the image in DataMarker LabelT
 ## Drawing the vector images using SkiaSharp
 
 ### Step 1: 
-For setting up SkiaSharp, add SkiaSharp.Views.Forms NuGet package to your project.
+For setting up SkiaSharp, add [SkiaSharp.Views.Forms](https://www.nuget.org/packages/SkiaSharp.Views.Forms/2.80.3-preview.40) NuGet package to your project.
 
 ### Step 2: 
 Add an image to the project and set Build Action to Embedded Resource for your image.
 
 ### Step 3:
-Refer to step 3 of how to add SVG vector file directly into the DataMarker LabelTemplate property to define the height converter that will be used to calculate the height for the image.
+Refer to step 3 of how to add SVG vector file directly into the DataMarker [LabelTemplate](https://help.syncfusion.com/cr/xamarin/Syncfusion.SfChart.XForms.ChartDataMarker.html#Syncfusion_SfChart_XForms_ChartDataMarker_LabelTemplate) property to define the height converter that will be used to calculate the height for the image.
  
 ### Step 4: 
-In the DataMarker LabelTemplate, add the SKCanvasView and set the series color as Transparent to make the series disappear in the background.
+In the DataMarker **LabelTemplate**, add the **SKCanvasView** and set the series color as Transparent to make the series disappear in the background.
 
 **[Xaml]**
 ```
@@ -194,7 +194,7 @@ In the DataMarker LabelTemplate, add the SKCanvasView and set the series color a
 </chart:SfChart>
 ```
 ### Step 5: 
-Load the image resource as SKBitmap from the assembly and draw the image on the canvas by using the PaintSurface event.
+Load the image resource as **SKBitmap** from the assembly and draw the image on the canvas by using the **PaintSurface** event.
 
 **[C#]**
 ```
@@ -234,5 +234,4 @@ static class BitmapExtensions
 }
 ```
 
-
-
+KB article - [How to create vector image in Xamarin.Forms Charts](https://www.syncfusion.com/kb/12941/how-to-create-vector-image-in-xamarin-forms-charts)
